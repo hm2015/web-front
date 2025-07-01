@@ -113,33 +113,37 @@ const handleMouseLeave = () => {
       <div class="grid grid-cols-6 mb-12">
         <!-- Gears 产品系列 -->
         <div class="text-white">
-          <h4 class="text-base font-semibold mb-2 text-white uppercase tracking-wide">Gears</h4>
+          <h4
+            class="text-base font-semibold mb-2 text-white tracking-wide border-b border-gray-300/30 pb-0 inline-block"
+          >
+            Gears
+          </h4>
           <ul class="list-none p-0 m-0">
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Cosmolodge 2-person Tent</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Cosmolodge 4-person Tent</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Nomad Outdoor chair</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >FireWhip Fire Pit</a
               >
             </li>
@@ -148,40 +152,44 @@ const handleMouseLeave = () => {
 
         <!-- Follow Us 社交媒体 -->
         <div class="text-white">
-          <h4 class="text-base font-semibold mb-2 text-white uppercase tracking-wide">Follow Us</h4>
+          <h4
+            class="text-base font-semibold mb-2 text-white tracking-wide border-b border-gray-300/30 pb-0 inline-block"
+          >
+            Follow Us
+          </h4>
           <ul class="list-none p-0 m-0">
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Facebook</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Instagram</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Tiktok</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Spotify</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Youtube</a
               >
             </li>
@@ -190,56 +198,58 @@ const handleMouseLeave = () => {
 
         <!-- CLIENT SERVICES 客户服务 -->
         <div class="text-white">
-          <h4 class="text-base font-semibold mb-2 text-white uppercase tracking-wide">
-            CLIENT SERVICES
+          <h4
+            class="text-base font-semibold mb-2 text-white tracking-wide border-b border-gray-300/30 pb-0 inline-block"
+          >
+            Client Services
           </h4>
           <ul class="list-none p-0 m-0">
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >FAQ</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Customer Service</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Track Order</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Exchanges and returns</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Payment</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Terms Of Service</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Contact Us</a
               >
             </li>
@@ -248,35 +258,37 @@ const handleMouseLeave = () => {
 
         <!-- Business Center 商务中心 -->
         <div class="text-white">
-          <h4 class="text-base font-semibold mb-2 text-white uppercase tracking-wide">
+          <h4
+            class="text-base font-semibold mb-2 text-white tracking-wide border-b border-gray-300/30 pb-0 inline-block"
+          >
             Business Center
           </h4>
           <ul class="list-none p-0 m-0">
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Stockists</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Become A Dealer</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Group Sale Program</a
               >
             </li>
             <li class="mb-0">
               <a
                 href="#"
-                class="text-gray-300 no-underline text-sm leading-6 transition-colors duration-200 hover:text-white"
+                class="text-gray-300 no-underline text-base font-light leading-6 transition-colors duration-200 hover:text-white"
                 >Wholesale</a
               >
             </li>

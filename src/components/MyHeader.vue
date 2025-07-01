@@ -1,5 +1,5 @@
 <template>
-  <header class="header-nav fixed top-0 left-0 right-0 z-1000 bg-transparent backdrop-blur-sm">
+  <header class="header-nav fixed top-0 left-0 right-0 z-1000 bg-transparent backdrop-blur-ms">
     <div class="mx-auto px-10 flex items-center justify-between h-16 relative">
       <!-- 左侧导航菜单 -->
       <nav class="flex gap-10 flex-1">

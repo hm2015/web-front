@@ -189,28 +189,28 @@ const debounce = (func, wait) => {
 const updateDragLimits = () => {
   const viewportWidth = window.innerWidth
   let cardWidth = 500
-  let rightTextWidth = 64
+  let rightTextWidth = 100
   let leftTextWidth = 288
   let cardSpacing = 5
 
   if (viewportWidth <= 480) {
     cardWidth = 350
-    rightTextWidth = 36
+    rightTextWidth = 60
     leftTextWidth = 200
     cardSpacing = 3
   } else if (viewportWidth <= 768) {
     cardWidth = 400
-    rightTextWidth = 40
+    rightTextWidth = 70
     leftTextWidth = 240
     cardSpacing = 4
   } else if (viewportWidth <= 968) {
     cardWidth = 450
-    rightTextWidth = 48
+    rightTextWidth = 80
     leftTextWidth = 240
     cardSpacing = 4
   } else if (viewportWidth <= 1200) {
     cardWidth = 480
-    rightTextWidth = 56
+    rightTextWidth = 90
     leftTextWidth = 260
   }
 
@@ -487,7 +487,7 @@ const initSecondSectionAnimations = () => {
   ScrollTrigger.create({
     trigger: secondSectionRef.value,
     start: 'top top',
-    end: isMobile ? '+=1500' : '+=2500', // 移动端缩短滚动距离
+    end: isMobile ? '+=800' : '+=1200', // 移动端缩短滚动距离
     scrub: isMobile ? 0.5 : true, // 移动端使用较慢的scrub
     pin: true,
     anticipatePin: 1,
@@ -525,7 +525,7 @@ const onDrag = (event) => {
   // 计算拖动范围限制 - 考虑响应式设计
   const viewportWidth = window.innerWidth
   let cardWidth = 500 // w-125 对应 500px
-  let rightTextWidth = 64 // w-16 对应 64px
+  let rightTextWidth = 100 // w-25 对应 100px
   let leftTextWidth = 288 // w-72 对应 288px
   let cardSpacing = 5 // mr-1.25 对应 5px
 
@@ -535,12 +535,12 @@ const onDrag = (event) => {
     return
   } else if (viewportWidth <= 968) {
     cardWidth = 450
-    rightTextWidth = 48
+    rightTextWidth = 80
     leftTextWidth = 240
     cardSpacing = 4
   } else if (viewportWidth <= 1200) {
     cardWidth = 480
-    rightTextWidth = 56
+    rightTextWidth = 90
     leftTextWidth = 260
   }
 
@@ -738,12 +738,19 @@ const handleSubscribe = () => {
 
     <!-- 第一屏 - 英雄区块 -->
     <section class="relative h-screen flex items-center justify-start overflow-hidden">
-      <!-- 背景视频 -->
       <div class="absolute inset-0 -z-20">
-        <video autoplay muted loop class="w-full h-full object-cover">
+        <!-- 背景视频 -->
+        <!-- <video autoplay muted loop class="w-full h-full object-cover">
           <source src="/videos/Video_hero_AFA_D.mp4" type="video/mp4" />
           您的浏览器不支持视频播放。
-        </video>
+        </video> -->
+
+        <!-- 背景图片 -->
+        <div
+          class="w-full h-full bg-cover bg-center bg-no-repeat"
+          style="background-image: url('/images/home/hero/1.png')"
+        ></div>
+
         <div class="absolute inset-0 bg-black/30 -z-10"></div>
       </div>
 
@@ -791,7 +798,7 @@ const handleSubscribe = () => {
         <!-- 左侧产品信息卡片 -->
         <div
           ref="productCardRef"
-          class="bg-brand-orange px-5 py-6 rounded-none text-black max-w-md w-full lg:max-w-md h-auto lg:h-screen-45 max-h-[350px] min-h-[250px] lg:min-h-[300px] flex flex-col justify-between self-end mb-5 lg:mb-0 box-border"
+          class="bg-brand-orange px-5 py-6 rounded-none text-black max-w-md w-full lg:max-w-md h-auto lg:h-screen-45 max-h-[350px] min-h-[250px] lg:min-h-[300px] flex flex-col justify-between self-end mb-5 lg:mb-10 box-border"
         >
           <h2 class="text-3xl font-black leading-tight text-black uppercase tracking-tighter">
             NOMAD<br />OUTDOOR CHAIR
@@ -830,11 +837,11 @@ const handleSubscribe = () => {
 
         <!-- 右侧标题文字 -->
         <div
-          class="flex justify-center lg:justify-end items-start h-auto lg:h-full pt-5 lg:pt-30 self-center lg:self-start"
+          class="flex justify-center lg:justify-end items-start h-auto lg:h-full pt-5 lg:pt-16 self-center lg:self-start"
         >
           <h3
             ref="rightTitleRef"
-            class="text-overlay font-light leading-tight text-white text-center lg:text-right drop-shadow-lg m-0"
+            class="text-overlay font-black leading-tight text-white text-center lg:text-right drop-shadow-lg m-0"
           >
             One-handed pickup<br />
             and two-step installation
@@ -877,7 +884,7 @@ const handleSubscribe = () => {
       <div class="absolute inset-0 w-full h-full z-20 pointer-events-none">
         <!-- 左产品图区块 -->
         <div
-          class="tent-product-block tent-product-left absolute top-0 left-0 h-full flex items-center justify-center transition-all duration-300 ease-out z-30 backdrop-blur-[0.5px] will-change-transform"
+          class="tent-product-block tent-product-left absolute top-0 left-1.5 h-full flex items-center justify-center transition-all duration-300 ease-out z-30 backdrop-blur-[0.5px] will-change-transform"
           :class="{ hovering: showProduct2P }"
         >
           <img
@@ -912,12 +919,12 @@ const handleSubscribe = () => {
         </div>
         <!-- 左滑出文字和按钮叠加层 -->
         <div
-          class="absolute top-0 h-full w-[50vw] -left-[50vw] flex flex-col justify-center items-start mx-auto px-10 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] pointer-events-none z-60 will-change-transform"
+          class="absolute top-0 h-full w-[50vw] -left-[50vw] flex flex-col justify-center items-start mx-auto px-13 opacity-0 transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] pointer-events-none z-60 will-change-transform"
           :class="{ 'left-0 opacity-100': showProduct2P }"
         >
           <!-- 产品描述 -->
           <p
-            class="text-lg leading-relaxed mt-[-120px] mb-5 text-white/90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] max-w-md pointer-events-none font-medium tracking-wide"
+            class="text-lg leading-[1.1] font-light mt-[-120px] mb-5 text-white/90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] max-w-md pointer-events-none tracking-wide"
           >
             Ultra-lightweight 2-person tent designed for backpackers who demand space without the
             weight. Quick setup technology and superior weather protection make this your perfect
@@ -926,7 +933,8 @@ const handleSubscribe = () => {
 
           <!-- 行动按钮 -->
           <button
-            class="relative overflow-hidden group transform-gpu bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 border-none rounded-none text-sm font-medium cursor-pointer transition-all duration-300 ease-out uppercase tracking-wide hover:scale-105 hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 backdrop-blur-sm"
+            class="relative overflow-hidden group transform-gpu text-base font-medium cursor-pointer transition-all duration-300 ease-out uppercase tracking-wide hover:scale-105 hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 backdrop-blur-sm px-6 py-3 border-none rounded-none"
+            style="background-color: #e6e9f0; color: #367eeb"
             @mouseenter="handleButtonHover(true, '2P')"
             @mouseleave="handleButtonHover(false, '2P')"
             aria-label="探索2P帐篷详情"
@@ -960,7 +968,7 @@ const handleSubscribe = () => {
         >
           <!-- 产品描述 -->
           <p
-            class="text-lg leading-relaxed mt-[-120px] mb-5 text-white/90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] max-w-md ml-auto pointer-events-none font-medium tracking-wide text-right"
+            class="text-lg leading-[1.1] font-light mt-[-120px] mb-5 text-white/90 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] max-w-md ml-auto pointer-events-none tracking-wide text-right"
           >
             Spacious 4-person family tent engineered for comfort and durability. Premium materials
             and thoughtful design make camping effortless for the whole family.
@@ -968,7 +976,8 @@ const handleSubscribe = () => {
 
           <!-- 行动按钮 -->
           <button
-            class="relative overflow-hidden group transform-gpu bg-gradient-to-r from-yellow-400 to-yellow-500 text-black px-6 py-3 border-none rounded-none text-sm font-medium cursor-pointer transition-all duration-300 ease-out uppercase tracking-wide hover:scale-105 hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 backdrop-blur-sm"
+            class="relative overflow-hidden group transform-gpu text-base font-medium cursor-pointer transition-all duration-300 ease-out uppercase tracking-wide hover:scale-105 hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 backdrop-blur-sm px-6 py-3 border-none rounded-none"
+            style="background-color: #c8ff00; color: #333333"
             @mouseenter="handleButtonHover(true, '4P')"
             @mouseleave="handleButtonHover(false, '4P')"
             aria-label="探索4P帐篷详情"
@@ -990,12 +999,54 @@ const handleSubscribe = () => {
       <div class="relative w-full h-full">
         <!-- 左侧固定的文字块 -->
         <div
-          class="absolute left-0 top-0 w-72 h-full bg-brand-orange text-black flex items-start justify-center pt-[10%] z-10"
+          class="absolute left-0 top-0 w-72 h-full bg-brand-orange text-black flex items-start justify-center pt-[5%] z-10"
         >
           <div class="flex flex-col items-center">
-            <h2 class="text-4xl font-black uppercase tracking-tighter mb-5 m-0">JOURNAL</h2>
-            <div class="w-full h-1 bg-black"></div>
+            <h2 class="text-5xl font-black uppercase tracking-tighter mb-1 m-0">JOURNAL</h2>
+            <div class="w-full h-0.5 bg-black"></div>
           </div>
+        </div>
+
+        <!-- 左侧箭头按钮 -->
+        <div class="absolute left-72 top-0 h-full flex items-center justify-center z-20">
+          <button
+            class="bg-transparent border border-white rounded-full w-12 h-12 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
+            aria-label="查看上一页杂志内容"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- 右侧箭头按钮 -->
+        <div class="absolute right-0 top-0 h-full flex items-center justify-center z-20">
+          <button
+            class="bg-transparent border border-white rounded-full w-12 h-12 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
+            aria-label="查看更多杂志内容"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
         </div>
 
         <!-- 可拖动的内容区域 -->
@@ -1015,14 +1066,16 @@ const handleSubscribe = () => {
             style="background-image: url('/images/home/journal/j1.png')"
           >
             <div
-              class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-journal text-white h-1/5 flex flex-col justify-start items-start"
+              class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-journal text-white h-1/3 flex flex-col justify-start items-start"
             >
               <span
-                class="text-sm font-semibold text-brand-orange uppercase tracking-wider mb-2 drop-shadow-md"
+                class="text-brand-orange tracking-wider mb-0 drop-shadow-md"
+                style="font-size: 15px; font-weight: 300"
                 >News</span
               >
               <h3
-                class="text-lg font-bold leading-tight text-white m-0 drop-shadow-lg max-w-full break-words overflow-visible whitespace-normal"
+                class="leading-tight text-white m-0 drop-shadow-lg max-w-full break-words overflow-visible whitespace-normal"
+                style="font-size: 28px; font-weight: 400"
               >
                 Unicar at the 2025 ISPO Exhibition in Grammy
               </h3>
@@ -1035,14 +1088,16 @@ const handleSubscribe = () => {
             style="background-image: url('/images/home/journal/j2.png')"
           >
             <div
-              class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-journal text-white h-1/5 flex flex-col justify-start items-start"
+              class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-journal text-white h-1/3 flex flex-col justify-start items-start"
             >
               <span
-                class="text-sm font-semibold text-brand-orange uppercase tracking-wider mb-2 drop-shadow-md"
+                class="text-brand-orange tracking-wider mb-0 drop-shadow-md"
+                style="font-size: 15px; font-weight: 300"
                 >New Drop</span
               >
               <h3
-                class="text-lg font-bold leading-tight text-white m-0 drop-shadow-lg max-w-full break-words overflow-visible whitespace-normal"
+                class="leading-tight text-white m-0 drop-shadow-lg max-w-full break-words overflow-visible whitespace-normal"
+                style="font-size: 28px; font-weight: 400"
               >
                 From The Music to Branding with Tweety Sense Earphone
               </h3>
@@ -1055,14 +1110,16 @@ const handleSubscribe = () => {
             style="background-image: url('/images/home/journal/J3.png')"
           >
             <div
-              class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-journal text-white h-1/5 flex flex-col justify-start items-start"
+              class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-journal text-white h-1/3 flex flex-col justify-start items-start"
             >
               <span
-                class="text-sm font-semibold text-brand-orange uppercase tracking-wider mb-2 drop-shadow-md"
+                class="text-brand-orange tracking-wider mb-0 drop-shadow-md"
+                style="font-size: 15px; font-weight: 300"
                 >News</span
               >
               <h3
-                class="text-lg font-bold leading-tight text-white m-0 drop-shadow-lg max-w-full break-words overflow-visible whitespace-normal"
+                class="leading-tight text-white m-0 drop-shadow-lg max-w-full break-words overflow-visible whitespace-normal"
+                style="font-size: 28px; font-weight: 400"
               >
                 Smart Gear Unicar Launches App-Controlled System
               </h3>
@@ -1071,12 +1128,10 @@ const handleSubscribe = () => {
 
           <!-- 右侧文字块 -->
           <div
-            class="inline-block align-top w-16 h-full bg-brand-orange text-black text-center relative"
+            class="inline-flex align-top w-25 h-full bg-brand-orange text-black text-center items-center justify-center"
           >
-            <div
-              class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap"
-            >
-              <h2 class="text-sm font-black uppercase tracking-widest mb-0 m-0">右侧文字块</h2>
+            <div class="w-full text-center pr-4">
+              <h2 class="text-xs tracking-widest mb-0 m-0 text-center">Read More</h2>
             </div>
           </div>
         </div>
@@ -1109,6 +1164,7 @@ const handleSubscribe = () => {
           <div class="mb-20 transition-all ease-smooth">
             <p
               class="text-xl lg:text-2xl leading-tight text-white/95 m-0 max-w-6xl mx-auto drop-shadow-md about-description"
+              style="font-weight: 200"
             >
               Everyone explores differently.<br />
               Uniquear designs for every path, every pace, and every purpose.<br />
@@ -1195,6 +1251,11 @@ const handleSubscribe = () => {
   line-height: 0.85;
   letter-spacing: -0.05em;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 第二屏右侧标题文字优化 */
+.text-overlay {
+  font-size: clamp(2.5rem, 4vw, 4rem);
 }
 
 .hero-title span {
@@ -1369,7 +1430,7 @@ footer {
   }
 
   :deep(.w-50:last-child) {
-    width: 48px;
+    width: 80px;
   }
 
   :deep(.w-125:not(:first-child):not(:last-child)) {
@@ -1462,7 +1523,7 @@ footer {
   }
 
   :deep(.w-50:last-child) {
-    width: 40px;
+    width: 70px;
     height: 400px;
     display: inline-block;
   }
@@ -1565,7 +1626,7 @@ footer {
   }
 
   :deep(.w-50:last-child) {
-    width: 36px;
+    width: 60px;
     height: 350px;
   }
 
