@@ -1,0 +1,63 @@
+/* StandardSemiExtd Font Family */
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-100-hairline.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-150-ultralight.otf') format('opentype');
+  font-weight: 150;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-200-extralight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-300-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-400-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-500-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-600-demibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-700-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StandardSemiExtd';
+  src: url('./fonts/standardsemiextd-800-extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}

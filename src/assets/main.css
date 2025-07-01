@@ -1,0 +1,97 @@
+@import 'tailwindcss';
+
+/* Tailwind CSS v4 自定义CSS变量 */
+:root {
+  /* 品牌颜色 */
+  --color-brand-orange: #ff6b35;
+  --color-brand-orange-hover: #e55529;
+  --color-brand-orange-dark: #e65c00;
+}
+
+/* 自定义实用类 */
+@layer utilities {
+  .bg-brand-orange {
+    background-color: var(--color-brand-orange, #fe4814);
+  }
+
+  .bg-brand-orange-hover {
+    background-color: var(--color-brand-orange-hover, #e55529);
+  }
+
+  .bg-brand-orange-dark {
+    background-color: var(--color-brand-orange-dark, #e65c00);
+  }
+
+  .text-brand-orange {
+    color: var(--color-brand-orange, #fe4814);
+  }
+
+  .shadow-brand-orange\/30 {
+    box-shadow:
+      0 10px 15px -3px rgba(255, 107, 53, 0.3),
+      0 4px 6px -2px rgba(255, 107, 53, 0.3);
+  }
+
+  .shadow-brand-orange\/40 {
+    box-shadow: 0 25px 50px -12px rgba(255, 107, 53, 0.4);
+  }
+
+  .h-screen-90 {
+    height: 90vh;
+  }
+
+  .h-screen-93 {
+    height: 93vh;
+  }
+
+  .h-screen-45 {
+    height: 45vh;
+  }
+
+  .h-screen-80 {
+    height: 80vh;
+  }
+
+  .gap-15 {
+    gap: 3.75rem;
+  }
+
+  .bg-gradient-journal {
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.1) 0%,
+      rgba(0, 0, 0, 0.3) 50%,
+      transparent 100%
+    );
+  }
+
+  .text-hero {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+  }
+
+  .text-section {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .text-overlay {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .backdrop-blur-xs {
+    backdrop-filter: blur(2px);
+  }
+
+  .z-1000 {
+    z-index: 1000;
+  }
+
+  .transition-smooth {
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+}
+@import './fonts.css';
+@import './base.css';
+#app {
+  margin: 0 auto;
+  font-weight: normal;
+}
