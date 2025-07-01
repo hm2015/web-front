@@ -16,4 +16,9 @@ export default defineConfig({
   css: {
     devSourcemap: true,
   },
+  base: '/', // 替换为你的 GitHub 仓库名
+  build: {
+    outDir: 'docs',
+    assetsDir: 'assets'
+  }
 })
