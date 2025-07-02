@@ -875,24 +875,12 @@ const handleSubscribe = () => {
           <h1
             class="hero-title font-black leading-[0.85] mb-8 uppercase tracking-[-0.05em] mt-0 mx-0"
           >
-            <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
-              >PLAY</span
-            >
-            <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
-              >OUTSIDE</span
-            >
-            <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
-              >THE</span
-            >
-            <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
-              >LINES</span
-            >
+            <span class="block text-[clamp(2.5rem,8vw,6rem)]">PLAY</span>
+            <span class="block text-[clamp(2.5rem,8vw,6rem)]">OUTSIDE</span>
+            <span class="block text-[clamp(2.5rem,8vw,6rem)]">THE</span>
+            <span class="block text-[clamp(2.5rem,8vw,6rem)]">LINES</span>
           </h1>
-          <p class="hero-description text-white mb-10 leading-6 drop-shadow-md max-w-full m-0">
+          <p class="hero-description text-white mb-10 leading-6 max-w-full m-0">
             The next generation gear_ feels simple and works like magic.
           </p>
         </div>
@@ -1001,6 +989,7 @@ const handleSubscribe = () => {
         <div
           class="tent-product-block tent-product-left absolute top-0 left-1.5 h-full flex items-center justify-center transition-all duration-300 ease-out z-30 backdrop-blur-[0.5px] will-change-transform"
           :class="{ hovering: showProduct2P }"
+          style="margin-left: 1%"
         >
           <img
             src="/images/home/tent/2p_1.png"
@@ -1123,9 +1112,9 @@ const handleSubscribe = () => {
         </div>
 
         <!-- 左侧箭头按钮 -->
-        <div class="absolute left-79 top-0 h-full flex items-center justify-center z-20">
+        <div class="absolute right-0 top-0 mt-20 mr-25 h-full flex items-start justify-center z-20">
           <button
-            class="bg-transparent border border-white rounded-full w-12 h-12 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
+            class="bg-[#000]/15 backdrop-blur-[6px] border border-white rounded-full w-10 h-10 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
             :class="{
               'opacity-30 cursor-not-allowed': !canScrollLeft,
               'hover:scale-110': canScrollLeft,
@@ -1142,7 +1131,7 @@ const handleSubscribe = () => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="w-5 h-5"
+              class="w-4 h-4"
             >
               <path d="M15 18l-6-6 6-6" />
             </svg>
@@ -1150,9 +1139,9 @@ const handleSubscribe = () => {
         </div>
 
         <!-- 右侧箭头按钮 -->
-        <div class="absolute right-30 top-0 h-full flex items-center justify-center z-20">
+        <div class="absolute right-0 top-0 mt-20 mr-10 h-full flex items-start justify-center z-20">
           <button
-            class="bg-transparent border border-white rounded-full w-12 h-12 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
+            class="bg-[#000]/15 backdrop-blur-[6px] border border-white rounded-full w-10 h-10 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
             :class="{
               'opacity-30 cursor-not-allowed': !canScrollRight,
               'hover:scale-110': canScrollRight,
@@ -1169,7 +1158,7 @@ const handleSubscribe = () => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="w-5 h-5"
+              class="w-4 h-4"
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
@@ -1383,6 +1372,9 @@ const handleSubscribe = () => {
 /* Hero description 样式优化 */
 .hero-description {
   font-size: 20px; /* 比 text-lg (18px) 大 2px */
+  text-shadow: none; /* 确保没有文字阴影 */
+  box-shadow: none; /* 确保没有盒子阴影 */
+  filter: none; /* 确保没有滤镜效果 */
 }
 
 /* 第二屏右侧标题文字优化 */
@@ -1393,7 +1385,10 @@ const handleSubscribe = () => {
 .hero-title span {
   display: block;
   color: #ff6b35; /* Orange-500 */
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  text-shadow: none; /* 确保没有文字阴影 */
+  box-shadow: none; /* 确保没有盒子阴影 */
+  filter: none; /* 确保没有滤镜效果 */
+  /* filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); */
 }
 
 /* 悬停时产品图的视觉效果 */
