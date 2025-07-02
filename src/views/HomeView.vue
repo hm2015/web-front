@@ -167,6 +167,10 @@ const isDragging = ref(false)
 const startX = ref(0)
 const startOffset = ref(0)
 
+// 控制箭头按钮状态的响应式数据
+const canScrollLeft = ref(false)
+const canScrollRight = ref(true)
+
 // 控制第六屏 New Product 区块的响应式数据
 const newProductSectionRef = ref(null)
 const newProductContentsSectionRef = ref(null)
@@ -297,9 +301,14 @@ onMounted(() => {
   // 添加窗口大小变化监听器（使用防抖优化性能）
   const debouncedResize = debounce(resizeCanvas, 100)
   const debouncedDragLimits = debounce(updateDragLimits, 100)
+  const debouncedButtonStates = debounce(updateButtonStates, 100)
 
   window.addEventListener('resize', debouncedResize)
   window.addEventListener('resize', debouncedDragLimits)
+  window.addEventListener('resize', debouncedButtonStates)
+
+  // 初始化按钮状态
+  updateButtonStates()
 
   // 清理观察器
   onUnmounted(() => {
@@ -308,6 +317,7 @@ onMounted(() => {
     // 移除窗口大小变化监听器
     window.removeEventListener('resize', debouncedResize)
     window.removeEventListener('resize', debouncedDragLimits)
+    window.removeEventListener('resize', debouncedButtonStates)
   })
 })
 
@@ -337,11 +347,11 @@ const startSplashAnimation = () => {
   // 计算精确的移动距离
   // 屏幕中心Y坐标：window.innerHeight / 2
   // 需要向上移动的距离：(屏幕高度 / 2)
-  const moveDistance = -(window.innerHeight / 2 + 1) // 第一阶段：白色背景从上到下逐渐褪去，同时logo组合移动到导航栏位置
+  const moveDistance = -(window.innerHeight / 2 + 1.6) // 第一阶段：白色背景从上到下逐渐褪去，同时logo组合移动到导航栏位置
   const delayTime = 0.8 // 延迟时间，单位为秒
   tl.to(splashBackground.value, {
     opacity: 0,
-    duration: 4,
+    duration: 3,
     ease: 'power2.out',
     delay: delayTime,
   })
@@ -359,7 +369,7 @@ const startSplashAnimation = () => {
     .to(
       splashLogo.value?.querySelectorAll('path, rect, polygon') || [],
       {
-        fill: '#efeee8',
+        fill: '#fffffc',
         duration: 2.5,
         ease: 'power2.out',
       },
@@ -368,13 +378,12 @@ const startSplashAnimation = () => {
     .to(
       splashFigure.value?.querySelectorAll('path') || [],
       {
-        fill: '#efeee8',
+        fill: '#fffffc',
         duration: 2.5,
         ease: 'power2.out',
       },
       delayTime, // 与背景淡出同时
     )
-
     // 第二阶段：figure-logo继续向上移动并淡出
     .to(
       splashFigure.value,
@@ -386,8 +395,7 @@ const startSplashAnimation = () => {
       },
       delayTime + 2.4, // 在logo组合移动结束后开始（延迟 + 2.5秒移动 - 0.1秒提前）
     )
-
-    // 第三阶段：导航栏淡入
+    // 第三阶段1：导航栏淡入
     .to(
       '.header-nav',
       {
@@ -397,7 +405,16 @@ const startSplashAnimation = () => {
       },
       delayTime + 2.5, // 导航栏在logo组合移动结束后淡入（延迟 + 2.5秒移动）
     )
-
+    // 第三阶段2：logo继续淡出
+    .to(
+      splashLogo.value,
+      {
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+      },
+      delayTime + 2.5, // 在logo组合移动结束后开始（延迟 + 2.5秒移动 - 0.1秒提前）
+    )
     // 第四阶段：英雄标题逐字符淡入
     .to(
       heroTitle.chars,
@@ -555,6 +572,7 @@ const onDrag = (event) => {
   const minOffset = Math.min(0, availableWidth - totalContentWidth)
 
   journalDragOffset.value = Math.max(minOffset, Math.min(maxOffset, newOffset))
+  updateButtonStates()
 }
 
 const stopDrag = () => {
@@ -563,6 +581,103 @@ const stopDrag = () => {
   document.removeEventListener('mouseup', stopDrag)
   document.removeEventListener('touchmove', onDrag)
   document.removeEventListener('touchend', stopDrag)
+  updateButtonStates()
+}
+
+// 箭头按钮点击控制方法
+const scrollLeft = () => {
+  if (!canScrollLeft.value) return
+
+  const currentOffset = journalDragOffset.value
+  const newOffset = Math.min(0, currentOffset + 500) // w-125对应500px
+
+  // 使用GSAP进行平滑动画
+  gsap.to(journalDragOffset, {
+    value: newOffset,
+    duration: 0.5,
+    ease: 'power2.out',
+    onUpdate: updateButtonStates,
+  })
+}
+
+const scrollRight = () => {
+  if (!canScrollRight.value) return
+
+  const currentOffset = journalDragOffset.value
+  const newOffset = currentOffset - 500 // w-125对应500px
+
+  // 计算拖动范围限制
+  const viewportWidth = window.innerWidth
+  let cardWidth = 500
+  let rightTextWidth = 100
+  let leftTextWidth = 288
+  let cardSpacing = 5
+
+  // 响应式尺寸调整
+  if (viewportWidth <= 768) {
+    return // 移动端不进行操作
+  } else if (viewportWidth <= 968) {
+    cardWidth = 450
+    rightTextWidth = 80
+    leftTextWidth = 240
+    cardSpacing = 4
+  } else if (viewportWidth <= 1200) {
+    cardWidth = 480
+    rightTextWidth = 90
+    leftTextWidth = 260
+  }
+
+  const totalContentWidth = cardWidth * 3 + cardSpacing * 3 + rightTextWidth
+  const availableWidth = viewportWidth - leftTextWidth
+  const minOffset = Math.min(0, availableWidth - totalContentWidth)
+
+  const finalOffset = Math.max(minOffset, newOffset)
+
+  // 使用GSAP进行平滑动画
+  gsap.to(journalDragOffset, {
+    value: finalOffset,
+    duration: 0.5,
+    ease: 'power2.out',
+    onUpdate: updateButtonStates,
+  })
+}
+
+// 更新按钮状态的方法
+const updateButtonStates = () => {
+  const viewportWidth = window.innerWidth
+  let cardWidth = 500
+  let rightTextWidth = 100
+  let leftTextWidth = 288
+  let cardSpacing = 5
+
+  // 响应式尺寸调整
+  if (viewportWidth <= 768) {
+    canScrollLeft.value = false
+    canScrollRight.value = false
+    return
+  } else if (viewportWidth <= 968) {
+    cardWidth = 450
+    rightTextWidth = 80
+    leftTextWidth = 240
+    cardSpacing = 4
+  } else if (viewportWidth <= 1200) {
+    cardWidth = 480
+    rightTextWidth = 90
+    leftTextWidth = 260
+  }
+
+  const totalContentWidth = cardWidth * 3 + cardSpacing * 3 + rightTextWidth
+  const availableWidth = viewportWidth - leftTextWidth
+  const maxOffset = 0
+  const minOffset = Math.min(0, availableWidth - totalContentWidth)
+
+  const currentOffset = journalDragOffset.value
+
+  // 检查是否可以向左滚动（向右移动内容）
+  canScrollLeft.value = currentOffset < maxOffset
+
+  // 检查是否可以向右滚动（向左移动内容）
+  canScrollRight.value = currentOffset > minOffset
 }
 // 控制第五屏 About Us 区块动画的响应式数据
 const aboutSectionRef = ref(null)
@@ -761,24 +876,24 @@ const handleSubscribe = () => {
             class="hero-title font-black leading-[0.85] mb-8 uppercase tracking-[-0.05em] mt-0 mx-0"
           >
             <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] text-orange-500 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
               >PLAY</span
             >
             <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] text-orange-500 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
               >OUTSIDE</span
             >
             <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] text-orange-500 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
               >THE</span
             >
             <span
-              class="block text-[clamp(2.5rem,8vw,6rem)] text-orange-500 drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
+              class="block text-[clamp(2.5rem,8vw,6rem)] drop-shadow-[0_4px_8px_rgba(0,0,0,0.3)]"
               >LINES</span
             >
           </h1>
-          <p class="text-lg text-white mb-10 leading-6 drop-shadow-md max-w-lg m-0">
-            The next generation gear feels simple and works like magic.
+          <p class="hero-description text-white mb-10 leading-6 drop-shadow-md max-w-full m-0">
+            The next generation gear_ feels simple and works like magic.
           </p>
         </div>
       </div>
@@ -811,13 +926,13 @@ const handleSubscribe = () => {
           </p>
           <div class="flex flex-row gap-5 items-center justify-between">
             <ul class="list-none p-0 m-0 flex-1">
-              <li class="text-xs leading-5 text-black font-medium m-0 list-none">
+              <li class="text-[xx-small] leading-[1.15] text-black font-normal m-0 list-none">
                 More Ultra-Compact, Easy Setup
               </li>
-              <li class="text-xs leading-5 text-black font-medium m-0 list-none">
+              <li class="text-[xx-small] leading-[1.15] text-black font-normal m-0 list-none">
                 Four Different High-back Support
               </li>
-              <li class="text-xs leading-5 text-black font-medium m-0 list-none">
+              <li class="text-[xx-small] leading-[1.15] text-black font-normal m-0 list-none">
                 Seat Width: 17 in. x 19 inch Size
               </li>
             </ul>
@@ -934,7 +1049,7 @@ const handleSubscribe = () => {
           <!-- 行动按钮 -->
           <button
             class="relative overflow-hidden group transform-gpu text-base font-medium cursor-pointer transition-all duration-300 ease-out uppercase tracking-wide hover:scale-105 hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 backdrop-blur-sm px-6 py-3 border-none rounded-none"
-            style="background-color: #e6e9f0; color: #367eeb"
+            style="background-color: #1e88e5; color: #fff"
             @mouseenter="handleButtonHover(true, '2P')"
             @mouseleave="handleButtonHover(false, '2P')"
             aria-label="探索2P帐篷详情"
@@ -1008,9 +1123,15 @@ const handleSubscribe = () => {
         </div>
 
         <!-- 左侧箭头按钮 -->
-        <div class="absolute left-72 top-0 h-full flex items-center justify-center z-20">
+        <div class="absolute left-79 top-0 h-full flex items-center justify-center z-20">
           <button
             class="bg-transparent border border-white rounded-full w-12 h-12 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
+            :class="{
+              'opacity-30 cursor-not-allowed': !canScrollLeft,
+              'hover:scale-110': canScrollLeft,
+            }"
+            :disabled="!canScrollLeft"
+            @click="scrollLeft"
             aria-label="查看上一页杂志内容"
           >
             <svg
@@ -1029,9 +1150,15 @@ const handleSubscribe = () => {
         </div>
 
         <!-- 右侧箭头按钮 -->
-        <div class="absolute right-0 top-0 h-full flex items-center justify-center z-20">
+        <div class="absolute right-30 top-0 h-full flex items-center justify-center z-20">
           <button
             class="bg-transparent border border-white rounded-full w-12 h-12 cursor-pointer transition-all duration-300 hover:scale-110 focus:outline-none flex items-center justify-center"
+            :class="{
+              'opacity-30 cursor-not-allowed': !canScrollRight,
+              'hover:scale-110': canScrollRight,
+            }"
+            :disabled="!canScrollRight"
+            @click="scrollRight"
             aria-label="查看更多杂志内容"
           >
             <svg
@@ -1227,7 +1354,7 @@ const handleSubscribe = () => {
                 type="email"
                 placeholder="Your Email Address"
                 v-model="subscriberEmail"
-                class="flex-1 px-3 py-3 border-none rounded-none text-sm bg-white text-black outline-none box-border placeholder:text-gray-600 focus:outline-none focus:shadow-none"
+                class="flex-1 px-3 py-3 border-none rounded-none text-sm bg-white text-black outline-none box-border placeholder:text-gray-400 focus:outline-none focus:shadow-none"
                 required
               />
               <button
@@ -1248,9 +1375,14 @@ const handleSubscribe = () => {
 /* Hero title 样式优化 */
 .hero-title {
   font-weight: 900;
-  line-height: 0.85;
+  line-height: 1.15;
   letter-spacing: -0.05em;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+}
+
+/* Hero description 样式优化 */
+.hero-description {
+  font-size: 20px; /* 比 text-lg (18px) 大 2px */
 }
 
 /* 第二屏右侧标题文字优化 */
@@ -1260,7 +1392,7 @@ const handleSubscribe = () => {
 
 .hero-title span {
   display: block;
-  color: #f97316; /* Orange-500 */
+  color: #ff6b35; /* Orange-500 */
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
 }
 
